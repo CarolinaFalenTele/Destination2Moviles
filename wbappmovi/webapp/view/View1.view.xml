@@ -1,0 +1,274 @@
+<mvc:View
+    controllerName="wb.wbappmovi.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:smartchart="sap.ui.comp.smartchart"
+    xmlns:sl="sap.ui.comp"
+    xmlns="sap.m"
+>
+    <f:DynamicPage id="no">
+        <f:title>
+            <f:DynamicPageTitle id="nodf">
+                <f:heading>
+                    <Title
+                        id="mid"
+                        text="Lista Productos"
+                        level="H1"
+                        class="infoText"
+                    />
+                </f:heading>
+                <f:expandedContent>
+                    <Label
+                        id="expandedLabel"
+                        text="Lista completa"
+                    />
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Label
+                        id="snappedLabel"
+                        text=""
+                    />
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="go">
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad"
+                    >
+                        <fb:filterGroupItems>
+
+                          <fb:FilterGroupItem
+                                id="nur"
+                                name="Name"
+                                label="Marca"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputRecontract"
+                                         value="{/ZBI_VAR_MARCA}"
+                                        placeholder="Buscar Marca"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+
+                                <fb:customData>
+                                    <core:CustomData
+                                        key="class"
+                                        value="required-label"
+                                    />
+                                </fb:customData>
+                            </fb:FilterGroupItem>
+
+
+                        
+
+                            <fb:FilterGroupItem
+                                id="nurqee"
+                                name="Fechas"
+                                label="Fecha"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DatePicker
+                                        id="inputMonth"
+                                        value="{/A0CIPM_DATE_KEY_CMP}"
+                                        displayFormat="MM-yyyy-dd"
+                                        valueFormat="yyyy-MM-dd"
+                                        placeholder="Selecciona"
+                                        change="onDateChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- Filtros adicionales -->
+    
+                            <fb:FilterGroupItem
+                                id="recontract"
+                                name="Producto"
+                                label="Producto"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputCompanyCode"
+                                        placeholder="Buscar Producto"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                          
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <IconTabBar
+                id="iconTabBar"
+                class="sapUiResponsiveContentPadding"
+            >
+                <items>
+                    <IconTabFilter
+                        id="tab1"
+                        text="Contratos Tabla"
+                    >
+                        <Table
+                            id="table"
+                            inset="false"
+                            items="{/ZTNM_STOCK_PLAN_ENTREGAS(ZBI_VAR_MARCA='27',ZBI_VAR_PROD='',A0CIPM_DATE_KEY_CMP=datetime'2024-06-18T00:00:00')/Results}"
+                        >
+                            <columns>
+                                <Column
+                                    id="columnId2"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId2"
+                                        text="Modelo"
+                                    />
+                                </Column>
+                                <Column
+                                    id="columnId23"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId23"
+                                        text="Stock"
+                                    />
+                                </Column>
+                                <Column
+                                    id="columnId3"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId3"
+                                        text="Serie"
+                                    />
+                                </Column>
+                                <Column
+                                    id="columnId4"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId4"
+                                        text="ZBI_CMLAR_T"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    id="columnListItem1"
+                                    vAlign="Middle"
+                                >
+                                    <cells>
+                                        <ObjectIdentifier
+                                            id="objId1"
+                                            title="{ZBI_CCMAR_T}"
+                                        />
+                                        <Text
+                                            id="text12"
+                                            text="{ZBI_CMMAT}"
+                                        />
+                                        <Text
+                                            id="text1"
+                                            text="{ZBI_CMLAR}"
+                                        />
+                                        <Text
+                                            id="text2"
+                                            text="{ZBI_CMLAR_T}"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="tab2"
+                        text="Contratos List"
+                    >
+                        <List
+                            id="List"
+                            headerText="TITULO PRUEBA"
+                            selectionChange="onSelectionChange"
+                            class="sapUiResponsiveMargin whiteBackground"
+                            width="auto"
+                        >
+                            <headerToolbar>
+                                <Toolbar
+                                    id="d"
+                                    class="whiteBackground"
+                                >
+                                    <Title
+                                        id="d2"
+                                        text="Lista De Solicitudes"
+                                        level="H2"
+                                        class="celesteText"
+                                    />
+                            
+                                </Toolbar>
+                            </headerToolbar>
+
+                            <items>
+                                <ObjectListItem
+                                    id="n2"
+                                    title="Modelo"
+                                    number="{ZBI_CCMAR_T}"
+                                    numberUnit="Contract"
+                                    type="Active"
+                                >
+                                    <!-- Custom attributes for additional fields -->
+                                    <attributes>
+                                        <ObjectAttribute
+                                            id="n4"
+                                            text="Stock: {ZBI_CMMAT}"
+                                            class="warningText"
+                                        />
+                                        <ObjectAttribute
+                                            id="n5"
+                                            text="Serie: {ZBI_CMLAR}"
+                                        />
+                                        <ObjectAttribute
+                                            id="n6"
+                                            text="ZBI_CMLAR_T: {ZBI_CMLAR_T}"
+                                        />
+                                    </attributes>
+                                </ObjectListItem>
+                            </items>
+                        </List>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="tab3"
+                        text="Grafico"
+                    />
+                    <IconTabFilter
+                        id="tab4"
+                        text="People"
+                    />
+                </items>
+            </IconTabBar>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
